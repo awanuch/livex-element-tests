@@ -2,7 +2,7 @@ import { step, TestSettings, Until, By, TestData } from "@flood/element";
 
 export const settings: TestSettings = {
     loopCount: 1,
-    description: "NexTech AR - Front-end Load Test",
+    description: "LiveX - Front-end Load Test - Login and Navigate",
     screenshotOnFailure: true,
     disableCache: true,
     clearCache: true,

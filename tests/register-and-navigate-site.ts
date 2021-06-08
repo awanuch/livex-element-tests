@@ -6,7 +6,7 @@ import {
 
 export const settings: TestSettings = {
     loopCount: 1,
-    description: "NexTech AR - Front-end Load Test",
+    description: "LiveX - Front-end Load Test - Register and navigate site.",
     screenshotOnFailure: true,
     disableCache: true,
     clearCache: true,
