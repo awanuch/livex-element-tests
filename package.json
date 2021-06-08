@@ -1,0 +1,9 @@
+{
+  "name": "livex-frontend-load-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@flood/element": "^2.0.4"
+  }
+}
