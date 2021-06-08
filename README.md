@@ -52,19 +52,13 @@ I would recommend setting a hard limit on fails. For example, if the platform cr
 kill the test so you're not running up your VUHs (Virtual User Hours).
 
 ## Launching Your Flood
-Select "Demand" for your Infrastructure Type
-
-Select which regions you want test users to run from. This is useful if you're testing latency on a heavy load.
-
-Set your UPR (Users Per Region). **IMPORTANT:** This will *multiply* your VUHs (Virtual User Hours) per region.
-
-Set your duration. This is how long the test will run for. This is for indefinite testing.
-
-Set your ramp. This will ramp up the users over a period of specified minutes. 
-
-An estimated VUH usage will be shown to you in the summary section. 
-
-If you're happy with your configuration, click "Launch Test". 
+- Select "Demand" for your Infrastructure Type
+- Select which regions you want test users to run from. This is useful if you're testing latency on a heavy load.
+- Set your UPR (Users Per Region). **IMPORTANT:** This will *multiply* your VUHs (Virtual User Hours) per region.
+- Set your duration. This is how long the test will run for. This is for indefinite testing.
+- Set your ramp. This will ramp up the users over a period of specified minutes. 
+- An estimated VUH usage will be shown to you in the summary section. 
+- If you're happy with your configuration, click "Launch Test". 
 
 ## Notes about testing
 It can take several minutes for Flood to set up the Virtual User grids. Once that's done, Flood will queue your test.
