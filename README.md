@@ -10,6 +10,7 @@ Note: They also recommend using yarn over NPM. They have NPM support in their do
 `
 
 To run a test, navigate to the directory where your test script is at and run:
+
 `bash
     element run your-script.ts --no-headless
 `
