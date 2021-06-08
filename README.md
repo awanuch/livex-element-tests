@@ -1,4 +1,5 @@
 # Installing
+
 You need to install element-cli to run the tests.
 
 Note: Element 1.5.1's compiler is broken (at least on Windows). They recommend that you use the beta release.

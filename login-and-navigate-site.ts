@@ -13,7 +13,8 @@ export const settings: TestSettings = {
 
 export default () => {
     // Config 
-    // let url = "http://localhost:3000/?show=phoenix";
+    // let url = "http://localhost:3000/?show=phoenix"; // Make sure you're running the master branch!
+    // let url = "http://localhost:3000/?show=phoenixloadtesting"; // Make sure you're running the master branch!
     // let url = "https://venue.events-nextechar.com/landing?show=phoenix";
     let url = "https://venue.events-nextechar.com/landing?show=phoenixloadtesting";
     let loginNavButton = "button[width=max-content]";
@@ -40,7 +41,6 @@ export default () => {
     step("Open Login Modal", async (browser) => {
         await browser.visit(url);
 
-        // Comment the last 2 commands if running local phoenix event.
         let loginNavButtonEl = By.css(loginNavButton)
         if(loginNavButtonEl) {
             await browser.wait(Until.elementIsVisible(By.css(loginNavButton)));
@@ -65,13 +65,13 @@ export default () => {
         await browser.sendKeys("Enter")
     })
 
-    step("Navigate to Welcome Page", async (browser) => {
-        await Navigate(browser, "Welcome Page");
+    step("Navigate to Home Page", async (browser) => {
+        await Navigate(browser, "Home");
         await delay(3);
     })
 
-    step("Navigate to Auditorium", async (browser) => {
-        await Navigate(browser, "Auditorium");
+    step("Navigate to Live Now Page", async (browser) => {
+        await Navigate(browser, "Live Now");
         await delay(15);
     })
 
@@ -86,7 +86,7 @@ export default () => {
     })
 
     step("Navigate to Virtual Exhibits", async (browser) => {
-        await Navigate(browser, "Virtual Exhibits");
+        await Navigate(browser, "Exhibit Showcase");
         await delay(3);
     })
 
