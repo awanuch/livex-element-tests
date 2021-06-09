@@ -5,11 +5,64 @@ import {
     random
 } from 'faker';
 
+/** READABLE EXPECTED WORKFLOW
+ * 
+ *   - Opens Login Modal
+ * 
+ *   [If] it's the first run,
+ *   - Clicks "Register"
+ *   - Enters Credentials
+ *   - Registers & Logs In
+ *   [Endif]
+ *   [If] it's not the first run
+ *   - Enters Credentials
+ *   - Logs In
+ *   [Endif]
+ * 
+ *   - Navigates to "Home"
+ * 
+ *   - Navigates to Live Now
+ *   - Waits 3-5 Seconds
+ *   - Interacts with Poll
+ * 
+ *   - Navigates to Schedule
+ *   - Clicks the first bookmark 4 times
+ *   - Clicks "Check In" button
+
+ *   - Navigates to Presenters
+ *   - Opens Profile: Chetwynd Rodrigo
+ *   - Bookmarks Chetwynd
+ *   - Opens Profile: Yau Boon Lim
+ *   - Bookmarks Yau
+ *   - Opens Profile: Paul Duffy
+ *   - Boomkarks Paul
+ *   - Opens Profile: Rob Christie
+ *   - Bookmarks Rob
+ *   
+ *   - Navigates to Virtual Exhibits
+ *   - Clicks the first bookmark button 4 times (takes 8 seconds)
+ *   - Clicks the first "Learn More" button
+ *   - Clicks "Back"
+ * 
+ *   - Navigates to Attendees
+ *   - Opens Profile: Christopher Galano
+ *   - Bookmarks Christopher
+ *   - Opens Profile: Vincent Pelermo
+ *   - Bookmarks Vincent
+ *   - Opens Profile: Tyler McCarthy
+ *   - Bookmarks Tyler
+ *   - Opens Profile: Connie Cay-Santos
+ *   - Bookmarks Connie
+ * 
+ *   - Clicks on Profile Dropdown
+ *   - Logs Out
+ */
+
 export const settings: TestSettings = {
     // loopCount: 15,
-    loopCount: 1,
+    loopCount: 3,
     description: "LiveX - Front-end Load Test - Register and navigate site.",
-    screenshotOnFailure: true,
+    screenshotOnFailure: false,
     disableCache: true,
     clearCache: true,
     clearCookies: true,
