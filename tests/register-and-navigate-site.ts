@@ -98,12 +98,6 @@ export default () => {
 
     let credentialsCreated = false;
 
-    // Pauses the steps for x milliseconds.
-    const delay = seconds => new Promise(res => setTimeout(res, seconds * 1000));
-
-    // Randomly delays between min/max (10/20 default) seconds.
-    const randDelay = (min = 10, max = 20) => new Promise(res => setTimeout(res, Math.floor(Math.random() * (max - min + 1) + min) * 1000));
-
     let messages = []
     const log = (message) => {
         messages.push(message);
