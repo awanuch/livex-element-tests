@@ -67,6 +67,7 @@ export const settings: TestSettings = {
     disableCache: true,
     clearCache: true,
     clearCookies: true,
+    consoleFilter: ["log", "info"],
     actionDelay: 2,
     stepDelay: 4,
 };
