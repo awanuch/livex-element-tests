@@ -1,4 +1,5 @@
 import { step, TestSettings, Until, By, TestData, Condition, beforeEach, afterEach, afterAll, beforeAll } from "@flood/element";
+import * as assert from 'assert';
 import {
     name as fakeName,
     company as fakeJob,
@@ -66,8 +67,8 @@ export const settings: TestSettings = {
     disableCache: true,
     clearCache: true,
     clearCookies: true,
-    actionDelay: 0.5,
-    stepDelay: 0.5,
+    actionDelay: 2,
+    stepDelay: 4,
 };
 
 export default () => {
@@ -118,20 +119,7 @@ export default () => {
         await browser.wait(Until.elementIsVisible(By.css(styledNav)))
         await browser.click(By.visibleText(selector));
         await browser.wait(Until.elementIsVisible(By.css(headerTitle)));
-    }
-
-    const PickPresenter = async (browser, presenter) => {
-        await browser.wait(Until.elementIsVisible(By.visibleText(presenter)));
-        await browser.click(By.visibleText(presenter));
-        await browser.wait(Until.elementIsVisible(By.visibleText("Back")));
-        await randDelay(4, 8);
-        let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
-        await browser.click(By.css(selector))
-        await randDelay(1, 3);
-        await browser.click(By.visibleText("Back"));
-        await randDelay(1, 3);
-        await browser.wait(Until.elementIsVisible(By.css("button[class*=BookmarkIcon__BookmarkBtn]")));
-        await randDelay(1, 3);
+        await browser.takeScreenshot();
     }
 
     beforeAll(async (browser) => {
@@ -150,7 +138,6 @@ export default () => {
     })
 
     step.once("Register as New User", async (browser) => {
-
         await browser.click(By.visibleText("Register"));
         await browser.type(By.css(inputFirstName), credFirstName);
         await browser.type(By.css(inputLastName), credLastName);
@@ -162,121 +149,204 @@ export default () => {
         // Wait until video loads and watch to the end.
         await browser.wait(Until.elementIsVisible(By.css(".motion-bg")))
         credentialsCreated = true;
-        // await delay(22);
-        await delay(1);
     });
 
     step("Navigate to Home Page", async (browser) => {
         await Navigate(browser, "Home");
-        await randDelay(1, 2);
     })
 
     step("Navigate to Live Now Page", async (browser) => {
         await Navigate(browser, "Live Now");
-        await randDelay(3, 5);
     })
 
-    step.once("Interact with Poll", async (browser) => {
+    step.once("Select Poll Options", async (browser) => {
         // Interact with the poll
         let randomChoice = (random.number(4) + 1)
         // let element = await browser.findElement(By.attr("input", "id", "Choice_"+randomChoice));
+        await browser.wait(Until.elementIsVisible(By.visibleText(randomChoice.toString())))
         let element = await browser.findElement(By.visibleText(randomChoice.toString()));
-        try {
-            await browser.click(element);
-            await randDelay(1, 3);
-            await browser.click(By.visibleText("Submit"));
-            await randDelay(3, 5);
-            await browser.click(By.visibleText("Next"));
-        } catch (e) {
-            log("Poll interaction failed. Probably no poll.");
-        }
-        await randDelay(3, 5);
+        await browser.click(element);
+    })
+
+    step.once("Submit Poll", async(browser) => {
+        await browser.click(By.visibleText("Submit"));
+        await browser.takeScreenshot();
+    }) 
+
+    step.once("Check Poll Results", async(browser) => {
+        await browser.click(By.visibleText("Next"));
     })
 
     step("Navigate to Schedule", async (browser) => {
         await Navigate(browser, "Schedule");
+    })
 
-        // Bookmark events
+    step("Bookmark Event", async (browser) => {
         await browser.wait(Until.elementIsVisible(By.css("button[class*=BookmarkIcon__BookmarkBtn]")));
-        for (let i = 1; i < 4; i++) {
-            let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
-            await browser.click(By.css(selector))
-            await delay(2);
-        }
+        let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
+        await browser.click(By.css(selector))
+    })
 
+    step("Check In At Event", async (browser) => {
         await browser.wait(Until.elementIsVisible(By.visibleText("Check In")));
         await browser.click(By.visibleText("Check In"))
-
-        await randDelay(5, 10);
     })
 
     step("Navigate to Presenters", async (browser) => {
         await Navigate(browser, "Presenters");
-
-        // Bookmark and view presenters
         await browser.wait(Until.elementIsVisible(By.css("button[class*=BookmarkIcon__BookmarkBtn]")));
-        let presenters = [
-            "Chetwynd Rodrigo",
-            "Yau Boon Lim",
-            "Paul Duffy",
-            "Rob Christie"
-        ]
-        for(let presenter of presenters) {
-            try {
-                await PickPresenter(browser, presenter);
-            } catch(e) {
-                log("Couldn't select presenter: "+presenter);
-            }
-        }
+    })
 
-        await randDelay(5, 10);
+    step("Open Chetwynd Rodrigo", async(browser) => {
+        await browser.wait(Until.elementIsVisible(By.visibleText("Chetwynd Rodrigo")));
+        await browser.click(By.visibleText("Chetwynd Rodrigo"));
+    })
+
+    step("Bookmark Chetwynd Rodrigo", async(browser) => {
+        let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
+        await browser.click(By.css(selector))
+        await browser.takeScreenshot();
+    })
+
+    step("Go back from Chetwynd Rodrigo", async (browser) => {
+        await browser.click(By.visibleText("Back"));
+    })
+
+    step("Open Yau Boon Lim", async(browser) => {
+        await browser.wait(Until.elementIsVisible(By.visibleText("Yau Boon Lim")));
+        await browser.click(By.visibleText("Yau Boon Lim"));
+    })
+
+    step("Bookmark Yau Boon Lim", async(browser) => {
+        let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
+        await browser.click(By.css(selector))
+        await browser.takeScreenshot();
+    })
+
+    step("Go back from Yau Boon Lim", async (browser) => {
+        await browser.click(By.visibleText("Back"));
+    })
+
+    step("Open Paul Duffy", async(browser) => {
+        await browser.wait(Until.elementIsVisible(By.visibleText("Paul Duffy")));
+        await browser.click(By.visibleText("Paul Duffy"));
+    })
+
+    step("Bookmark Paul Duffy", async(browser) => {
+        let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
+        await browser.click(By.css(selector))
+        await browser.takeScreenshot();
+    })
+
+    step("Go back from Paul Duffy", async (browser) => {
+        await browser.click(By.visibleText("Back"));
+    })
+
+    step("Open Rob Christie", async(browser) => {
+        await browser.wait(Until.elementIsVisible(By.visibleText("Rob Christie")));
+        await browser.click(By.visibleText("Rob Christie"));
+    })
+
+    step("Bookmark Rob Christie", async(browser) => {
+        let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
+        await browser.click(By.css(selector))
+        await browser.takeScreenshot();
+    })
+
+    step("Go back from Rob Christie", async (browser) => {
+        await browser.click(By.visibleText("Back"));
     })
 
     step("Navigate to Virtual Exhibits", async (browser) => {
         await Navigate(browser, "Exhibit Showcase");
+    })
 
-        // Bookmark booths
+    step("Bookmark Virtual Exhibit", async (browser) => {
         await browser.wait(Until.elementIsVisible(By.css("button[class*=BookmarkIcon__BookmarkBtn]")));
-        for (let i = 1; i < 4; i++) {
-            let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
-            await browser.click(By.css(selector))
-            await delay(2);
-        }
+        let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
+        await browser.click(By.css(selector))
+    })
 
+    step("Open Virtual Exhibit", async (browser) => {
         await browser.click(By.visibleText("Learn More"));
         await browser.wait(Until.elementIsVisible(By.visibleText("Back")));
-        await browser.click(By.visibleText("Back"));
+    })
 
-        await randDelay();
+    step("Go Back", async(browser) => {
+        await browser.click(By.visibleText("Back"));
     })
 
     step("Navigate to Attendees", async (browser) => {
         await Navigate(browser, "Attendees");
-
-        // Bookmark and view presenters
         await browser.wait(Until.elementIsVisible(By.css("button[class*=BookmarkIcon__BookmarkBtn]")));
-        let attendees = [
-            "Christopher Galano",
-            "Vincent Palermo",
-            "Tyler McCarthy",
-            "Connie Cay-Santos"
-        ]
-        for(let attendee of attendees) {
-            try {
-                await PickPresenter(browser, attendee);
-            } catch(e) {
-                log("Couldn't select attendee: "+attendee);
-            }
-        }
+    })
 
-        await randDelay();
+    step("Open Christopher Galano", async(browser) => {
+        await browser.wait(Until.elementIsVisible(By.visibleText("Christopher Galano")));
+        await browser.click(By.visibleText("Christopher Galano"));
+    })
+
+    step("Bookmark Christopher Galano", async(browser) => {
+        let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
+        await browser.click(By.css(selector))
+        await browser.takeScreenshot();
+    })
+
+    step("Go back from Christopher Galano", async (browser) => {
+        await browser.click(By.visibleText("Back"));
+    })
+
+    step("Open Vincent Palermo", async(browser) => {
+        await browser.wait(Until.elementIsVisible(By.visibleText("Vincent Palermo")));
+        await browser.click(By.visibleText("Vincent Palermo"));
+    })
+
+    step("Bookmark Vincent Palermo", async(browser) => {
+        let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
+        await browser.click(By.css(selector))
+        await browser.takeScreenshot();
+    })
+
+    step("Go back from Vincent Palermo", async (browser) => {
+        await browser.click(By.visibleText("Back"));
+    })
+
+    step("Open Tyler McCarthy", async(browser) => {
+        await browser.wait(Until.elementIsVisible(By.visibleText("Tyler McCarthy")));
+        await browser.click(By.visibleText("Tyler McCarthy"));
+    })
+
+    step("Bookmark Tyler McCarthy", async(browser) => {
+        let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
+        await browser.click(By.css(selector))
+        await browser.takeScreenshot();
+    })
+
+    step("Go back from Tyler McCarthy", async (browser) => {
+        await browser.click(By.visibleText("Back"));
+    })
+
+    step("Open Connie Cay-Santos", async(browser) => {
+        await browser.wait(Until.elementIsVisible(By.visibleText("Connie Cay-Santos")));
+        await browser.click(By.visibleText("Connie Cay-Santos"));
+    })
+
+    step("Bookmark Connie Cay-Santos", async(browser) => {
+        let selector = "button[class*=BookmarkIcon__BookmarkBtn]"
+        await browser.click(By.css(selector))
+        await browser.takeScreenshot();
+    })
+
+    step("Go back from Connie Cay-Santos", async (browser) => {
+        await browser.click(By.visibleText("Back"));
+    })
+
+    step("Log Out", async (browser) => {
+        await browser.click(By.css(settingsOverlayButton));
+        await browser.click(By.visibleText("Log Out"));
     })
 
     afterAll(async (browser) => {
-        await browser.click(By.css(settingsOverlayButton));
-        delay(1);
-        await browser.click(By.visibleText("Log Out"));
-        await randDelay();
         printIssues();
     })
 
