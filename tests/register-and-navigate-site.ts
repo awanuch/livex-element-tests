@@ -23,7 +23,6 @@ import {
  *   - Navigates to "Home"
  * 
  *   - Navigates to Live Now
- *   - Waits 3-5 Seconds
  *   - Interacts with Poll
  * 
  *   - Navigates to Schedule
@@ -182,7 +181,7 @@ export default () => {
         await browser.click(By.css(selector))
     })
 
-    step("Check In At Event", async (browser) => {
+    step.once("Check In At Event", async (browser) => {
         await browser.wait(Until.elementIsVisible(By.visibleText("Check In")));
         await browser.click(By.visibleText("Check In"))
     })
