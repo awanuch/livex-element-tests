@@ -59,7 +59,7 @@ import {
  */
 
 export const settings: TestSettings = {
-    // loopCount: 15,
+    // loopCount: -1, // Runs Infinitely
     loopCount: 3,
     description: "LiveX - Front-end Load Test - Register and navigate site.",
     screenshotOnFailure: false,
@@ -121,6 +121,7 @@ export default () => {
     }
 
     const PickPresenter = async (browser, presenter) => {
+        await browser.wait(Until.elementIsVisible(By.visibleText(presenter)));
         await browser.click(By.visibleText(presenter));
         await browser.wait(Until.elementIsVisible(By.visibleText("Back")));
         await randDelay(4, 8);

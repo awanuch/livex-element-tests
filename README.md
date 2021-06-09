@@ -19,6 +19,8 @@ element run ./tests/your-script.ts --no-headless
 Running with the `--no-headless` flag will make an incognito chromium browser to run the test. 
 Running without it will only print the results to your console.
 
+**Note:** If you're running on local, your console is going to be flooded with HubProtocol tokens because LiveX console.logs it and it causes a weird display glitch. The test should continue to work fine, but you won't often be able to read the output. This is true for VS Code's terminal and Powershell. I haven't tested on Linux's terminal or MacOS's terminal.
+
 ## Element's Docs
 https://element.flood.io/docs/
 
